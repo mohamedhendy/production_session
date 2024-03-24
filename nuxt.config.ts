@@ -38,9 +38,7 @@ export default defineNuxtConfig({
     },
     modules: ['@pinia/nuxt', '@nuxtjs/i18n', '@boindil/vue-file-agent-next/nuxt',
     ],
-    build: {
-        transpile: ['tone', 'standardized-audio-context'],
-      },
+
     plugins: [
 
     ],
@@ -70,7 +68,6 @@ export default defineNuxtConfig({
     },
     vite: {
         optimizeDeps: { include: ['quill'] },
-        
     },
     router: {
         options: { linkExactActiveClass: 'active' },
