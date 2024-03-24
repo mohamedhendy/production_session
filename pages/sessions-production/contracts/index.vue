@@ -70,18 +70,19 @@
                                         "
                                         type="button"
                                         class="ltr:mr-2 rtl:ml-2"
-                                        v-tippy:edit
-                                    >
+                                        >
+                                        <!-- v-tippy:edit -->
                                         <icon-pencil />
                                     </button>
-                                    <tippy target="edit">{{ $t('edit') }} </tippy>
+                                    <!-- <tippy target="edit">{{ $t('edit') }} </tippy> -->
                                 </div>
                                 <div>
-                                    <button @click="deleteModal(data.value.id, data.value.name)" type="button" v-tippy:delete>
+                                    <!-- v-tippy:delete -->
+                                    <button @click="deleteModal(data.value.id, data.value.name)" type="button" >
                                         <icon-trash-lines />
                                     </button>
 
-                                    <tippy target="delete">{{ $t('delete') }}</tippy>
+                                    <!-- <tippy target="delete">{{ $t('delete') }}</tippy> -->
                                 </div>
                             </client-only>
                         </div>

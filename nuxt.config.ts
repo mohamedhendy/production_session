@@ -38,13 +38,29 @@ export default defineNuxtConfig({
     },
     modules: ['@pinia/nuxt', '@nuxtjs/i18n', '@boindil/vue-file-agent-next/nuxt',
     ],
-
+    build: {
+        transpile: ['tone', 'standardized-audio-context'],
+      },
     plugins: [
 
     ],
     i18n: {
         locales: [
+            { code: 'da', file: 'da.json' },
+            { code: 'de', file: 'de.json' },
+            { code: 'el', file: 'fr.json' },
             { code: 'en', file: 'en.json' },
+            { code: 'es', file: 'es.json' },
+            { code: 'fr', file: 'fr.json' },
+            { code: 'hu', file: 'hu.json' },
+            { code: 'it', file: 'it.json' },
+            { code: 'ja', file: 'ja.json' },
+            { code: 'pl', file: 'pl.json' },
+            { code: 'pt', file: 'pt.json' },
+            { code: 'ru', file: 'ru.json' },
+            { code: 'sv', file: 'sv.json' },
+            { code: 'tr', file: 'tr.json' },
+            { code: 'zh', file: 'zh.json' },
             { code: 'ar', file: 'ae.json' },
         ],
         lazy: true,
@@ -54,6 +70,7 @@ export default defineNuxtConfig({
     },
     vite: {
         optimizeDeps: { include: ['quill'] },
+        
     },
     router: {
         options: { linkExactActiveClass: 'active' },
@@ -64,8 +81,8 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         public: {
-            // apiUrl: 'http://127.0.0.1:8000/',
-            apiUrl: '/',
+            apiUrl: 'http://127.0.0.1:8000/',
+            // apiUrl: '/',
         },
     },
     devServer: {}
