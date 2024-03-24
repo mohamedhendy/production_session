@@ -137,7 +137,7 @@
 
 <script>
     import { FormWizard, TabContent } from 'vue3-form-wizard';
-    import { useRuntimeConfig } from '#imports'
+    import { useRuntimeConfig } from '#imports';
     import { useAppStore } from '@/stores/index';
     import 'vue3-form-wizard/dist/style.css';
     import Swal from 'sweetalert2';
@@ -163,7 +163,7 @@
         data() {
             return {
                 lang: useAppStore().locale,
-                apiUrl :  useRuntimeConfig().public.apiUrl,
+                apiUrl: useRuntimeConfig().public.apiUrl,
                 photographer: [
                     {
                         mobile: '',
@@ -638,15 +638,42 @@
                 }
             },
             async getContractsMenuList() {
-                await $fetch(`${this.apiUrl}/api/legal-form`, {
-                    method: 'GET',
-                }).then((res) => {
-                    this.contractMenuList = res.data;
-                    this.defaultContractContent(res.data[0].id);
+                const res = {
+                    data: [
+                        {
+                            id: 15,
+                            name_en: 'test Contract 1',
+                            name_ar: 'عقد اختبار 1',
+                            is_active: 1,
+                        },
+                        {
+                            id: 16,
+                            name_en: 'test number 2',
+                            name_ar: 'اختبار رقم 2',
+                            is_active: 1,
+                        },
+                        {
+                            id: 17,
+                            name_en: 'test contract#33',
+                            name_ar: 'عقد رقم #33',
+                            is_active: 1,
+                        },
+                    ],
+                };
+                this.contractMenuList = res.data;
+                    // this.defaultContractContent(res.data[0].id);
                     this.photographer.legal_form = this.contractMenuList[0];
                     this.location.legal_form = this.contractMenuList[0];
                     this.representative.legal_form = this.contractMenuList[0];
-                });
+                // await $fetch(`${this.apiUrl}/api/legal-form`, {
+                //     method: 'GET',
+                // }).then((res) => {
+                //     this.contractMenuList = res.data;
+                //     this.defaultContractContent(res.data[0].id);
+                //     this.photographer.legal_form = this.contractMenuList[0];
+                //     this.location.legal_form = this.contractMenuList[0];
+                //     this.representative.legal_form = this.contractMenuList[0];
+                // });
                 // .catch((err) => {
                 //     this.loading = false;
                 //     console.log('mhendy data', err);
@@ -763,12 +790,11 @@
         right: 0;
     }
     /* new  */
-  
-    
+
     .vue-form-wizard .wizard-nav-pills {
         flex-direction: column;
         background-color: #fff;
-       box-shadow: 0px 0px 2px #e3e3e3;
+        box-shadow: 0px 0px 2px #e3e3e3;
         padding: 20px 10px;
     }
     .vue-form-wizard .wizard-tab-content {
@@ -776,9 +802,9 @@
         flex-grow: 1;
         background-color: #fff;
         margin: 5px 20px;
-       box-shadow: 0px 0px 2px #e3e3e3;
+        box-shadow: 0px 0px 2px #e3e3e3;
     }
-   
+
     .vue-form-wizard .wizard-nav-pills li {
         margin-bottom: 24px;
         min-width: 228px;
@@ -798,10 +824,10 @@
         padding-left: 20px !important;
         padding-right: 20px !important;
     }
-    @media (min-width: 768px) { 
+    @media (min-width: 768px) {
         .wizard-navigation {
             display: flex;
-        }    
+        }
         .is_ar .vue-form-wizard .wizard-card-footer {
             padding-right: 267px !important;
             padding-left: 20px !important;
@@ -818,7 +844,6 @@
         float: left !important;
     }
 
-   
     .panel.h-full {
         background-color: #fff;
     }
@@ -835,4 +860,3 @@
         opacity: 0.5;
     }
 </style>
-

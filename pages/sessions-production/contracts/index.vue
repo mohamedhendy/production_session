@@ -55,9 +55,9 @@
                     nextArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
                 >
                     <template #name_ar="data">
-                        {{ lang == "ar" ? data.value.name_ar : data.value.name_en }}
+                        {{ lang == 'ar' ? data.value.name_ar : data.value.name_en }}
                     </template>
-                
+
                     <template #action="data">
                         <div class="flex items-center">
                             <client-only>
@@ -66,11 +66,11 @@
                                         @click="
                                             addNew = false;
                                             Edit = true;
-                                                selectedId = data.value.id;
+                                            selectedId = data.value.id;
                                         "
                                         type="button"
                                         class="ltr:mr-2 rtl:ml-2"
-                                        >
+                                    >
                                         <!-- v-tippy:edit -->
                                         <icon-pencil />
                                     </button>
@@ -78,7 +78,7 @@
                                 </div>
                                 <div>
                                     <!-- v-tippy:delete -->
-                                    <button @click="deleteModal(data.value.id, data.value.name)" type="button" >
+                                    <button @click="deleteModal(data.value.id, data.value.name)" type="button">
                                         <icon-trash-lines />
                                     </button>
 
@@ -165,7 +165,11 @@
     export default {
         components: {
             Vue3Datatable,
-            TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogOverlay,
+            TransitionRoot,
+            TransitionChild,
+            Dialog,
+            DialogPanel,
+            DialogOverlay,
             CreateNewContract,
             EditContract,
         },
@@ -192,8 +196,7 @@
                 delModalID: '',
             };
         },
-        mounted() {
-        },
+        mounted() {},
         created() {
             this.getContractsList();
         },
@@ -216,17 +219,43 @@
                 this.getContractsList();
             },
             async getContractsList() {
-                await $fetch(`${this.apiUrl}/api/legal-form`, {
-                    method: 'GET',
-                    headers: {
-                        'Accept-Language': this.lang,
-                    },
-                }).then((res) => {
-                    this.sessionList = res.data;
-                    this.rows = res.data;
-                  
-                    this.pageInfo = res.meta;
-                });
+                const res = {
+                    data: [
+                        {
+                            id: 15,
+                            name_en: 'test Contract 1',
+                            name_ar: 'عقد اختبار 1',
+                            is_active: 1,
+                        },
+                        {
+                            id: 16,
+                            name_en: 'test number 2',
+                            name_ar: 'اختبار رقم 2',
+                            is_active: 1,
+                        },
+                        {
+                            id: 17,
+                            name_en: 'test contract#33',
+                            name_ar: 'عقد رقم #33',
+                            is_active: 1,
+                        },
+                    ],
+                };
+                this.sessionList = res.data;
+                this.rows = res.data;
+
+                this.pageInfo = res.meta;
+                // await $fetch(`${this.apiUrl}/api/legal-form`, {
+                //     method: 'GET',
+                //     headers: {
+                //         'Accept-Language': this.lang,
+                //     },
+                // }).then((res) => {
+                //     this.sessionList = res.data;
+                //     this.rows = res.data;
+
+                //     this.pageInfo = res.meta;
+                // });
             },
             async deleteSession(id) {
                 await $fetch(`${this.apiUrl}/api/recording-session/${id}`, {

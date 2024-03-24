@@ -1,6 +1,5 @@
 <template>
     <div class="tgt">
-        
         <div class="mt-6" :class="addNew || Edit ? '' : 'panel'">
             <div v-if="addNew || Edit" class="mb-5 flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3 ltr:ml-auto rtl:mr-auto">
                 <button
@@ -49,11 +48,11 @@
                     :totalRows="totals"
                     :isServerMode="true"
                     :search="search"
-                     skin="whitespace-nowrap bh-table-hover"
+                    skin="whitespace-nowrap bh-table-hover"
                     :showFirstPage="false"
                     :showLastPage="false"
                     :showNumbersCount="20"
-                    :pageSizeOptions="[ 10, 20, 50, 100]"
+                    :pageSizeOptions="[10, 20, 50, 100]"
                     :paginationInfo="`${$t('showing')} {0} ${$t('to')}  {1} ${$t('of')} {2} ${$t('results')}`"
                     :noDataContent="$t('ThereAreNoData')"
                     @pageChange="handleCurrentChange"
@@ -82,7 +81,7 @@
                                         "
                                         type="button"
                                         class="ltr:mr-2 rtl:ml-2"
-                                        >
+                                    >
                                         <!-- v-tippy:edit -->
                                         <icon-pencil />
                                     </button>
@@ -233,25 +232,158 @@
                 this.page = val.current_page;
                 this.per_page = val.pagesize;
                 this.getSessionsList();
-
             },
             handleSizeChange(val) {
                 this.per_page = val;
                 this.getSessionsList();
             },
             async getSessionsList() {
-                await $fetch(`${this.apiUrl}/api/recording-session?per_page=${this.per_page}&page=${this.page}`, {
-                    method: 'GET',
-                    headers: {
-                        'Accept-Language': this.lang,
+                const res = {
+                    data: [
+                        {
+                            id: 11,
+                            name: '2021',
+                            country_id: 2,
+                            country: 'ألبانيا',
+                            city_id: 33,
+                            city: 'بيرات',
+                            datetime: null,
+                            has_videos: true,
+                            has_images: true,
+                        },
+                        {
+                            id: 12,
+                            name: 'جديد',
+                            country_id: 63,
+                            country: 'مصر',
+                            city_id: 1004,
+                            city: 'الفيوم',
+                            datetime: null,
+                            has_videos: true,
+                            has_images: true,
+                        },
+                        {
+                            id: 13,
+                            name: 'qawedawf',
+                            country_id: 3,
+                            country: 'الجزائر',
+                            city_id: 71,
+                            city: 'عين تموشنت',
+                            datetime: null,
+                            has_videos: true,
+                            has_images: true,
+                        },
+                        {
+                            id: 14,
+                            name: '2w43',
+                            country_id: 2,
+                            country: 'ألبانيا',
+                            city_id: 34,
+                            city: 'بولقيز',
+                            datetime: null,
+                            has_videos: false,
+                            has_images: true,
+                        },
+                        {
+                            id: 15,
+                            name: 'eadaf',
+                            country_id: 2,
+                            country: 'ألبانيا',
+                            city_id: 34,
+                            city: 'بولقيز',
+                            datetime: null,
+                            has_videos: true,
+                            has_images: true,
+                        },
+                        {
+                            id: 16,
+                            name: 'adfsda',
+                            country_id: 3,
+                            country: 'الجزائر',
+                            city_id: 72,
+                            city: 'الجزائر',
+                            datetime: null,
+                            has_videos: false,
+                            has_images: true,
+                        },
+                        {
+                            id: 17,
+                            name: 'sadfsdf',
+                            country_id: 4,
+                            country: 'ساموا الأمريكية',
+                            city_id: 119,
+                            city: 'روز ايلاند',
+                            datetime: null,
+                            has_videos: true,
+                            has_images: false,
+                        },
+                        {
+                            id: 18,
+                            name: 'sadfsdf',
+                            country_id: 4,
+                            country: 'ساموا الأمريكية',
+                            city_id: 119,
+                            city: 'روز ايلاند',
+                            datetime: null,
+                            has_videos: true,
+                            has_images: false,
+                        },
+                        {
+                            id: 19,
+                            name: 'ertewrt',
+                            country_id: 2,
+                            country: 'ألبانيا',
+                            city_id: 34,
+                            city: 'بولقيز',
+                            datetime: null,
+                            has_videos: false,
+                            has_images: true,
+                        },
+                        {
+                            id: 22,
+                            name: 'warfwe',
+                            country_id: 2,
+                            country: 'ألبانيا',
+                            city_id: 34,
+                            city: 'بولقيز',
+                            datetime: null,
+                            has_videos: false,
+                            has_images: true,
+                        },
+                    ],
+                    links: {
+                        first: 'http://127.0.0.1:8000//api/recording-session?page=1',
+                        last: 'http://127.0.0.1:8000//api/recording-session?page=2',
+                        prev: null,
+                        next: 'http://127.0.0.1:8000//api/recording-session?page=2',
                     },
-                }).then((res) => {
-                    this.sessionList = res.data;
-                    this.rows = res.data;
-                    this.totals =  res.meta.total;
-                    console.log("value",  this.totals)
-                    this.pageInfo = res.meta;
-                });
+                    meta: {
+                        current_page: 1,
+                        from: 1,
+                        last_page: 2,
+                        path: 'http://127.0.0.1:8000//api/recording-session',
+                        per_page: '10',
+                        to: 10,
+                        total: 12,
+                    },
+                };
+                this.sessionList = res.data;
+                this.rows = res.data;
+                this.totals = res.meta.total;
+                console.log('value', this.totals);
+                this.pageInfo = res.meta;
+                // await $fetch(`${this.apiUrl}/api/recording-session?per_page=${this.per_page}&page=${this.page}`, {
+                //     method: 'GET',
+                //     headers: {
+                //         'Accept-Language': this.lang,
+                //     },
+                // }).then((res) => {
+                //     this.sessionList = res.data;
+                //     this.rows = res.data;
+                //     this.totals = res.meta.total;
+                //     console.log('value', this.totals);
+                //     this.pageInfo = res.meta;
+                // });
             },
             async deleteSession(id) {
                 await $fetch(`${this.apiUrl}/api/recording-session/${id}`, {
